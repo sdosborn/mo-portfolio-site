@@ -16,7 +16,7 @@ const projects = (await getCollection('projects'))
     <div class="grid gap-6 md:grid-cols-2">
       {projects.map(project => (
         <a
-          href={`/projects/${project.slug}`}
+          href={`${import.meta.env.BASE_URL}projects/${project.slug}`}
           class="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow"
         >
           <div class="aspect-video bg-gray-100" />
