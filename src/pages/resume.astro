@@ -1,79 +1,122 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const experience = [
+  {
+    period: '2022 – Present',
+    title: 'Senior UX Designer',
+    company: 'Company Name',
+    description: 'Led end-to-end UX design for [product/feature]. Placeholder — replace with actual experience.',
+  },
+  {
+    period: '2019 – 2022',
+    title: 'UX Designer',
+    company: 'Company Name',
+    description: 'Placeholder — replace with actual experience.',
+  },
+];
+
+const education = [
+  {
+    period: '2015 – 2019',
+    title: 'B.S. / B.A. in [Field]',
+    company: 'University Name',
+    description: 'Placeholder — replace with actual coursework and highlights.',
+  },
+];
+
+const skills = [
+  'User Research', 'Wireframing', 'Prototyping', 'Usability Testing',
+  'Figma', 'Design Systems', 'Information Architecture', 'Interaction Design',
+];
+
+const awards = [
+  {
+    period: '2023',
+    title: 'Placeholder Award Name',
+    org: 'Awarding Organization',
+    description: 'Replace with the actual award, honor, or association and why it was given.',
+  },
+];
 ---
 
 <Base title="Resume" description="Resume of Melanie Osborne, UX Designer">
-  <section class="max-w-3xl mx-auto px-6 py-16">
-    <div class="flex items-start justify-between mb-12">
-      <div>
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Resume</h1>
-        <p class="text-gray-500">UX Designer</p>
-      </div>
-      <a
-        href="/resume.pdf"
-        download
-        class="shrink-0 border border-gray-200 text-gray-700 px-5 py-2.5 rounded-full text-sm font-medium hover:border-gray-400 transition-colors"
-      >
-        Download PDF
-      </a>
-    </div>
-
-    <!-- Experience -->
-    <section class="mb-12">
-      <h2 class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-6">Experience</h2>
-      <div class="space-y-8">
-        <div class="flex gap-6">
-          <div class="w-24 shrink-0 text-sm text-gray-400 pt-0.5">2022 – Present</div>
-          <div>
-            <h3 class="font-semibold text-gray-900">Senior UX Designer</h3>
-            <p class="text-sm text-accent-600 mb-2">Company Name</p>
-            <p class="text-sm text-gray-500 leading-relaxed">
-              Led end-to-end UX design for [product/feature]. Placeholder — replace with actual experience.
-            </p>
-          </div>
-        </div>
-        <div class="flex gap-6">
-          <div class="w-24 shrink-0 text-sm text-gray-400 pt-0.5">2019 – 2022</div>
-          <div>
-            <h3 class="font-semibold text-gray-900">UX Designer</h3>
-            <p class="text-sm text-accent-600 mb-2">Company Name</p>
-            <p class="text-sm text-gray-500 leading-relaxed">
-              Placeholder — replace with actual experience.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <hr class="border-gray-100 mb-12" />
-
-    <!-- Education -->
-    <section class="mb-12">
-      <h2 class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-6">Education</h2>
-      <div class="flex gap-6">
-        <div class="w-24 shrink-0 text-sm text-gray-400 pt-0.5">2015 – 2019</div>
+  <section class="bg-accent-200 py-20 flex-1">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="flex items-start justify-between flex-wrap gap-4 mb-14">
         <div>
-          <h3 class="font-semibold text-gray-900">B.S. / B.A. in [Field]</h3>
-          <p class="text-sm text-accent-600">University Name</p>
+          <h1 class="text-4xl font-serif font-semibold text-gray-900 mb-2">
+            <span class="bullet-mark"></span>Resume
+          </h1>
+          <p class="text-gray-700">UX Designer</p>
         </div>
+        <a
+          href="/resume.pdf"
+          download
+          class="shrink-0 bg-gray-900 text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-black transition-colors"
+        >
+          Download PDF
+        </a>
       </div>
-    </section>
 
-    <hr class="border-gray-100 mb-12" />
-
-    <!-- Skills -->
-    <section>
-      <h2 class="text-xs font-semibold tracking-widest uppercase text-gray-400 mb-6">Skills</h2>
-      <div class="flex flex-wrap gap-2">
-        {[
-          'User Research', 'Wireframing', 'Prototyping', 'Usability Testing',
-          'Figma', 'Design Systems', 'Information Architecture', 'Interaction Design',
-        ].map(skill => (
-          <span class="text-sm text-gray-600 bg-gray-100 px-3 py-1.5 rounded-full">
-            {skill}
-          </span>
+      <!-- Experience -->
+      <h2 class="text-2xl font-serif font-semibold text-gray-900 mb-6">Experience</h2>
+      <div class="space-y-6 mb-14">
+        {experience.map(job => (
+          <div class="bg-cream rounded-2xl shadow-md p-7 grid sm:grid-cols-[7rem_1fr] gap-4">
+            <div class="text-sm text-gray-500">{job.period}</div>
+            <div>
+              <h3 class="font-serif font-semibold text-gray-900">{job.title}</h3>
+              <p class="text-sm text-teal-700 mb-2">{job.company}</p>
+              <p class="text-sm text-gray-600 leading-relaxed">{job.description}</p>
+            </div>
+          </div>
         ))}
       </div>
-    </section>
+
+      <!-- Education -->
+      <h2 class="text-2xl font-serif font-semibold text-gray-900 mb-6">Education</h2>
+      <div class="space-y-6 mb-14">
+        {education.map(edu => (
+          <div class="bg-cream rounded-2xl shadow-md p-7 grid sm:grid-cols-[7rem_1fr] gap-4">
+            <div class="text-sm text-gray-500">{edu.period}</div>
+            <div>
+              <h3 class="font-serif font-semibold text-gray-900">{edu.title}</h3>
+              <p class="text-sm text-teal-700 mb-2">{edu.company}</p>
+              <p class="text-sm text-gray-600 leading-relaxed">{edu.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Design Skillset -->
+      <h2 class="text-2xl font-serif font-semibold text-gray-900 mb-6">Design Skillset</h2>
+      <div class="bg-cream rounded-2xl shadow-md p-7 mb-14">
+        <div class="grid sm:grid-cols-2 gap-y-3 gap-x-6">
+          {skills.map(skill => (
+            <div class="flex items-center text-sm text-gray-700">
+              <span class="bullet-mark"></span>{skill}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Awards, Recognition, and Associations -->
+      <h2 class="text-2xl font-serif font-semibold text-gray-900 mb-6">
+        Awards, Recognition, and Associations
+      </h2>
+      <div class="space-y-6">
+        {awards.map(award => (
+          <div class="bg-cream rounded-2xl shadow-md p-7 grid sm:grid-cols-[7rem_1fr] gap-4">
+            <div class="text-sm text-gray-500">{award.period}</div>
+            <div>
+              <h3 class="font-serif font-semibold text-gray-900">{award.title}</h3>
+              <p class="text-sm text-teal-700 mb-2">{award.org}</p>
+              <p class="text-sm text-gray-600 leading-relaxed">{award.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   </section>
 </Base>

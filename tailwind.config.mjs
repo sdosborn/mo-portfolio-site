@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Lato', 'system-ui', 'sans-serif'],
+        serif: ['Fraunces', 'serif'],
       },
       colors: {
         accent: {
@@ -18,6 +19,11 @@ export default {
           700: '#3f43c8',
           800: '#353aa2',
           900: '#303580',
+        },
+        cream: '#f6f1e7',
+        teal: {
+          600: '#1f4d3f',
+          700: '#173b30',
         },
       },
     },

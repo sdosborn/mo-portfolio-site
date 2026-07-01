@@ -2,39 +2,87 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 
-const projects = (await getCollection('projects'))
+const allProjects = (await getCollection('projects'))
   .sort((a, b) => a.data.order - b.data.order);
+
+const projects = allProjects.filter(p => p.data.status === 'published');
+const inDevelopment = allProjects.filter(p => p.data.status === 'in-development');
+
+const gradients = [
+  'from-fuchsia-400 via-rose-300 to-accent-400',
+  'from-accent-400 via-accent-300 to-emerald-300',
+  'from-amber-300 via-rose-300 to-accent-400',
+  'from-teal-600 via-accent-300 to-rose-300',
+];
 ---
 
-<Base title="Projects" description="UX design projects by Melanie Osborne">
-  <section class="max-w-5xl mx-auto px-6 py-16">
-    <h1 class="text-4xl font-bold text-gray-900 mb-3">Projects</h1>
-    <p class="text-gray-500 mb-12 max-w-xl">
-      A selection of UX design work spanning research, interaction design, and product strategy.
-    </p>
+<Base title="Portfolio" description="UX design projects by Melanie Osborne">
+  <section class="bg-accent-200 py-20 flex-1">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="flex items-end justify-between flex-wrap gap-4 mb-4">
+        <h1 class="text-4xl font-serif font-semibold text-gray-900">
+          <span class="bullet-mark"></span>My Work
+        </h1>
+      </div>
+      <p class="text-gray-700 mb-14 max-w-xl">
+        A selection of UX design work spanning research, interaction design, and product
+        strategy. Click into any project to see the full case study.
+      </p>
 
-    <div class="grid gap-6 md:grid-cols-2">
-      {projects.map(project => (
-        <a
-          href={`/projects/${project.slug}`}
-          class="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow"
-        >
-          <div class="aspect-video bg-gray-100" />
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-3">
-              {project.data.tags.map(tag => (
-                <span class="text-xs font-medium text-accent-600 bg-accent-50 px-2 py-1 rounded-full">
-                  {tag}
-                </span>
-              ))}
+      <div class="grid gap-8">
+        {projects.map((project, i) => (
+          <a
+            href={`/projects/${project.slug}`}
+            class="group grid md:grid-cols-2 bg-cream rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow"
+          >
+            <div class="p-8 flex flex-col justify-center order-2 md:order-1">
+              {(project.data.year || project.data.role) && (
+                <p class="text-xs tracking-widest uppercase text-gray-500 mb-2">
+                  {[project.data.year, project.data.role].filter(Boolean).join(' · ')}
+                </p>
+              )}
+              <h2 class="text-2xl font-serif font-semibold text-gray-900 group-hover:text-teal-700 transition-colors mb-3">
+                {project.data.title}
+              </h2>
+              <p class="text-sm text-gray-600 leading-relaxed mb-4">{project.data.description}</p>
+              <div class="flex flex-wrap gap-2">
+                {project.data.tags.map(tag => (
+                  <span class="text-xs font-medium text-teal-700 bg-teal-600/10 px-2 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
-            <h2 class="text-lg font-semibold text-gray-900 group-hover:text-accent-600 transition-colors mb-2">
-              {project.data.title}
-            </h2>
-            <p class="text-sm text-gray-500 leading-relaxed">{project.data.description}</p>
+            <div class="order-1 md:order-2 aspect-video md:aspect-auto overflow-hidden">
+              {project.data.thumbnail ? (
+                <img src={project.data.thumbnail} alt={project.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+              ) : (
+                <div class={`w-full h-full min-h-[220px] bg-gradient-to-br ${gradients[i % gradients.length]}`}></div>
+              )}
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {inDevelopment.length > 0 && (
+        <div class="mt-20">
+          <h2 class="text-2xl font-serif font-semibold text-gray-900 mb-2">
+            <span class="bullet-mark"></span>Projects in Development
+          </h2>
+          <p class="text-gray-700 mb-8 max-w-xl">Coming soon.</p>
+          <div class="grid gap-6 sm:grid-cols-2">
+            {inDevelopment.map(project => (
+              <div class="bg-cream/60 border border-dashed border-teal-600/30 rounded-2xl p-6">
+                <span class="inline-block text-xs font-medium text-teal-700 bg-teal-600/10 px-2 py-1 rounded-full mb-3">
+                  Coming Soon
+                </span>
+                <h3 class="text-lg font-serif font-semibold text-gray-900 mb-2">{project.data.title}</h3>
+                <p class="text-sm text-gray-600 leading-relaxed">{project.data.description}</p>
+              </div>
+            ))}
           </div>
-        </a>
-      ))}
+        </div>
+      )}
     </div>
   </section>
 </Base>
